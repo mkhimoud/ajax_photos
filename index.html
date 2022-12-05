@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+    <body>
+        <h1>GET AJAX</h1>
+        <hr>
+        <div id="main">
+            <button type="button" id="btn">Get Content</button>
+        </div>
+
+        <script language="javascript">
+            //https://jsonplaceholder.typicode.com/
+
+            document.getElementById("btn").addEventListener('click', function() {
+                chargementDeRessource();
+            });
+
+            function chargementDeRessource() {
+                const requestHttpTest = new XMLHttpRequest();
+                let url = "https://jsonplaceholder.typicode.com/photos";
+                
+
+                requestHttpTest.onload = function() {
+
+                    if (this.readyState == 4 && this.status == 200) {
+                        var textToJson = JSON.parse(this.responseText);
+                        console.log(this.textToJson);  
+                        affichage(textToJson);                  
+                    }
+                }
+
+                
+                requestHttpTest.open("GET", url, true);
+                requestHttpTest.send();
+            }
+            function affichage(arr) {
+            var out = "";
+            var i;
+
+            for (i = 0; i < arr.length; i++) {
+
+                console.log(arr[i]);
+
+                out += '<div class="bloc" href="' + arr[i].website + '">' +
+                    arr[i].id + ' - ' + arr[i].name + ' - Email: ' + arr[i].email + '</div>';
+            }
+            document.getElementById("main").innerHTML = out;
+        }
+       </script>     
+    </body>
+</html>
